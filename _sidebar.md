@@ -9,6 +9,7 @@
 * [Java 集合原理](study/array.md)
 * [Jenkins](study/jenkins.md)
 * [Linux](study/linux.md)
+* [Linux 每天命令](study/linuxCommand.md)
 * [MarkDown](study/markDown.md)
 * [MySql](study/mysql.md)
 * [MQ](study/mq.md)

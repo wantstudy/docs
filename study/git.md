@@ -1,23 +1,35 @@
-![Alt git_0](../_media/git_0.jpg)
-
-
-创建版本库
+安装配置
 ----
+> **Windows安装**
+	
+_[安装下载](https://git-scm.com/downloads)_
 
+_安装完成后进行以下配置_
+
+   `git config --global user.name "Your Name"`
+
+   `git config --global user.email "email@example.com"`
+	
+
+Git 项目/版本库管理
+----
 > __什么是版本库呢？版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。__
 
-_所以，创建一个版本库非常简单，首先，选择一个合适的地方，创建一个空目录：_
 
-	$ mkdir learngit
-	$ cd learngit
-	$ pwd
-	/Users/michael/learngit
+> **下载已有项目**
 
-*第二步，通过`git init`命令把这个目录变成Git可以管理的仓库：*
+	git clone git@github.com:wantstudy/docs.git
 
-	$ git init
-	Initialized empty Git repository in /Users/michael/learngit/.git/
+> **上传本地项目到`Github`**
 
+	git init 初始化目录为git项目
+	git add <files> 添加文件到仓库,文件可多选
+	git commit -m 'mark'  提交文件到本地仓库
+	git push -u origin master 提交文件到远程仓库，初次提交 -u  
+
+> **本地项目与远程项目关联**
+	
+	git remote add origin git@github.com:wantstudy/docs.git
 
 Git 常用操作命令
 -----
