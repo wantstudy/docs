@@ -2,7 +2,7 @@
 
 # version <small>0.1</small>
 
-> A magical documentation site generator.
+> A documentation to study.
 
 [GitHub](https://github.com/wantstudy/docs)
 [Get Started](README.md)
