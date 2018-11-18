@@ -8,23 +8,22 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="lib/themes/vue.css">
   <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
-
 </head>
 <body>
   <div id="app"></div>
-  <script>
+ 
+   <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script>
     window.$docsify = {
       name: 'NW_Study',
       repo: '',
-	    loadSidebar: true,
+      loadSidebar: true,
       mergeNavbar: true,
       coverpage: true,
-      
       repo: 'https://github.com/wantstudy/docs/',
       loadNavbar: true,
       loadNavbar: 'nav.md',
       mergeNavbar: true,
-
       search: {
         maxAge: 86400000, // 过期时间，单位毫秒，默认一天
         paths: 'atuo', // or 'auto'
@@ -45,7 +44,44 @@
         // 搜索标题的最大程级, 1 - 6
         depth: 2
       },
-      disqus: 'shortname'
+      disqus: 'shortname',
+      plugins: [
+        function (hook) {
+          var footer = [
+            '<hr/>',
+            ' <div id="gitalk-container"></div>',
+            '<footer>',
+            '<span><a href="https://github.com/QingWei-Li">cinwell</a> &copy;2017.</span>',
+            '<span>Proudly published with <a href="https://github.com/docsifyjs/docsify" target="_blank">docsify</a>.</span>',
+            '</footer>'
+          ].join('')
+
+          hook.afterEach(function (html) {
+            return html + footer
+          })
+
+          hook.doneEach(function() {
+            // 每次路由切换时数据全部加载完成后调用，没有参数。
+            // ...
+
+            // gitalk = new Gitalk({
+            //   clientID: '3166bd7720c1a2e35cc2',
+            //   clientSecret: '117bf872afbc09e8efea2c0935d43ef8ebf55029',
+            //   repo: 'docs',
+            //   owner: 'wantstudy',
+            //   admin: ['wantstudy'],
+            //   // facebook-like distraction free mode
+            //   distractionFreeMode: false
+            // })
+           /* gitalk.options.id = window.location.href
+            gitalk.render('gitalk-container')
+            console.log(gitalk);*/
+
+            loadTalk(window.location.href);
+
+          })
+        }
+      ]
     }
 
     
@@ -56,22 +92,42 @@
   <script src="lib/plugins/zoom-image.js"></script>
   <script src="//unpkg.com/docsify-copy-code"></script>
   <script src="//unpkg.com/docsify/lib/plugins/disqus.min.js"></script>
- <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
-<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+ 
+  
   <script type="text/javascript">
-     const gitalk = new Gitalk({
-      clientID: '',
-      clientSecret: '',
-      repo: 'https://github.com/wantstudy/docs',
+     /*var gitalk = new Gitalk({
+      clientID: '3166bd7720c1a2e35cc2',
+      clientSecret: '117bf872afbc09e8efea2c0935d43ef8ebf55029',
+      repo: 'docs',
       owner: 'wantstudy',
       admin: ['wantstudy'],
       // facebook-like distraction free mode
       distractionFreeMode: false
-  })
+    })*/
+
+
+     var gitalk ;
+
+     function loadTalk(path){
+        gitalk = new Gitalk({
+          id : path,
+          clientID: '3166bd7720c1a2e35cc2',
+          clientSecret: '117bf872afbc09e8efea2c0935d43ef8ebf55029',
+          repo: 'docs',
+          owner: 'wantstudy',
+          admin: ['wantstudy'],
+          // facebook-like distraction free mode
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container');
+        console.log(gitalk);
+     }
+
+
+   
 
   </script>
-  <div id="app"> </div>
-  <div id="test"></div>
-  <div id="gitalk-container"></div>
 </body>
 </html>
