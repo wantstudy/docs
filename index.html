@@ -16,7 +16,6 @@
    <script>
     window.$docsify = {
       name: 'WIT-Learner',
-      repo: '',
       loadSidebar: true,
       mergeNavbar: true,
       coverpage: true,
@@ -24,6 +23,7 @@
       loadNavbar: true,
       loadNavbar: 'nav.md',
       mergeNavbar: true,
+      subMaxLevel: 2,
       search: {
         maxAge: 86400000, // 过期时间，单位毫秒，默认一天
         paths: 'atuo', // or 'auto'
@@ -57,7 +57,7 @@
             // 每次路由切换时数据全部加载完成后调用，没有参数。
              var path = window.location.href.split('#')[1];
             if(path != '/' && path != '/README'){
-              loadTalk(path);    
+              // loadTalk(path);    
             }
           })
         }
@@ -75,7 +75,7 @@
   <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
  
   
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
      var gitalk ;
 
      function loadTalk(path){
@@ -96,6 +96,6 @@
 
    
 
-  </script>
+  </script> -->
 </body>
 </html>
