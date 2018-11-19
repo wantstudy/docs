@@ -42,3 +42,4 @@
 
 * Python 
 	* [Python](study/python.md)
+	* [微信小程序](study/wechat.md)
