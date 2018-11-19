@@ -15,7 +15,7 @@
    <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
    <script>
     window.$docsify = {
-      name: 'NW_Study',
+      name: 'WIT-Learner',
       repo: '',
       loadSidebar: true,
       mergeNavbar: true,
@@ -47,14 +47,7 @@
       disqus: 'shortname',
       plugins: [
         function (hook) {
-          var footer = [
-            '<hr/>',
-            ' <div id="gitalk-container"></div>',
-            '<footer>',
-            '<span><a href="https://github.com/QingWei-Li">cinwell</a> &copy;2017.</span>',
-            '<span>Proudly published with <a href="https://github.com/docsifyjs/docsify" target="_blank">docsify</a>.</span>',
-            '</footer>'
-          ].join('')
+          var footer = [' <div id="gitalk-container"></div>',].join('')
 
           hook.afterEach(function (html) {
             return html + footer
@@ -62,23 +55,10 @@
 
           hook.doneEach(function() {
             // 每次路由切换时数据全部加载完成后调用，没有参数。
-            // ...
-
-            // gitalk = new Gitalk({
-            //   clientID: '3166bd7720c1a2e35cc2',
-            //   clientSecret: '117bf872afbc09e8efea2c0935d43ef8ebf55029',
-            //   repo: 'docs',
-            //   owner: 'wantstudy',
-            //   admin: ['wantstudy'],
-            //   // facebook-like distraction free mode
-            //   distractionFreeMode: false
-            // })
-           /* gitalk.options.id = window.location.href
-            gitalk.render('gitalk-container')
-            console.log(gitalk);*/
-
-            loadTalk(window.location.href.split('#')[1]);
-
+             var path = window.location.href.split('#')[1];
+            if(path != '/' && path != '/README'){
+              loadTalk(path);    
+            }
           })
         }
       ]
@@ -96,17 +76,6 @@
  
   
   <script type="text/javascript">
-     /*var gitalk = new Gitalk({
-      clientID: '3166bd7720c1a2e35cc2',
-      clientSecret: '117bf872afbc09e8efea2c0935d43ef8ebf55029',
-      repo: 'docs',
-      owner: 'wantstudy',
-      admin: ['wantstudy'],
-      // facebook-like distraction free mode
-      distractionFreeMode: false
-    })*/
-
-
      var gitalk ;
 
      function loadTalk(path){
@@ -116,13 +85,12 @@
           clientSecret: '',
           repo: 'docs',
           owner: 'wantstudy',
-          admin: ['wantstudy'],
+          admin: ['wantstudy', 'WL-XIN'],
           // facebook-like distraction free mode
           distractionFreeMode: false
         })
 
         gitalk.render('gitalk-container');
-        console.log(gitalk);
      }
 
 
