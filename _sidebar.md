@@ -34,8 +34,8 @@
 	- [分布式](study/frame/distributed.md)
 	- [微服务](study/frame/microservice.md)
 - 前端
-	- [SocketIO](study/front/webSocket.md)
-	- [FreeMarker](study/front/freeMarker.md)
+	- [SocketIO](study/front/websocket.md)
+	- [FreeMarker](study/front/freemarker.md)
 - Python 
 	- [Python](study/python/python.md)
 - 微信
