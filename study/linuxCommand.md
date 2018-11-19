@@ -8,3 +8,6 @@
 `ls <commond> <fileName/path>
    -a 查看当前目录下所有文件,包括隐藏文件
    -l 显示文件详细信息,等同于 ll`
+
+  ![Alt ll](../_media/linux/ll.png)
+
