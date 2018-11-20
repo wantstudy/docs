@@ -66,14 +66,67 @@
 
     
   </script>
+
+
+
+
+
+  <div class="chat-message">
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+
+
+  </div>
+
+
+
+
   <script src="lib/docsify.min.js"></script>
   <script src="lib/plugins/search.js"></script>
   <script src="lib/plugins/ga.js"></script>
   <script src="lib/plugins/zoom-image.js"></script>
   <script src="//unpkg.com/docsify-copy-code"></script>
   <script src="lib/plugins/disqus.min.js"></script>
-  
- 
+  <script src="lib/plugins/gitalk.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+      $(function () {
+          var gitname = window.localStorage['git-name'];
+          if(!gitname){
+              gitname = '游客'+new Date().getTime().toString().substring(5);
+              window.localStorage['git-name']=gitname;
+          }
+          var socket = io('47.93.232.108:3001?gitname='+gitname);
+          var data ={};
+          $('form').submit(function(){
+              data.username = gitname;
+              data.msg = $('#m').val();
+
+              var text = gitname+': '+data.msg;
+              $('#messages').append($('<li style="border-left:200px;">').text(text));
+              socket.emit('chat message', data);
+              $('#m').val('');
+              return false;
+          });
+
+          socket.on('conn', function(data){
+              $('#messages').append($('<li style="color:blue;">').text(data.msg));
+          });
+          socket.on('disconn', function(data){
+              $('#messages').append($('<li style="color:red;">').text(data.msg));
+          });
+          socket.on('chat message', function(data){
+              $('#messages').append($('<li>').text(data.username+'('+data.clientIp+'):'+data.msg));
+          });
+
+      });
+  </script>
+
+  <script src="lib/plugins/disqus.min.js"></script>
   
   <script type="text/javascript">
      var gitalk ;
