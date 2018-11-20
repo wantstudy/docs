@@ -7,12 +7,13 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="lib/themes/vue.css">
-  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+  <link rel="stylesheet" href="lib/css/gitalk.css">
+  <link rel="stylesheet" href="lib/css/index.css">
 </head>
 <body>
   <div id="app"></div>
  
-   <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script src="lib/plugins/gitalk.min.js"></script>
    <script>
     window.$docsify = {
       name: 'WIT-Learner',
@@ -23,7 +24,7 @@
       loadNavbar: true,
       loadNavbar: 'nav.md',
       mergeNavbar: true,
-      subMaxLevel: 2,
+      subMaxLevel: 3,
       search: {
         maxAge: 86400000, // 过期时间，单位毫秒，默认一天
         paths: 'atuo', // or 'auto'
@@ -57,7 +58,7 @@
             // 每次路由切换时数据全部加载完成后调用，没有参数。
              var path = window.location.href.split('#')[1];
             if(path != '/' && path != '/README'){
-              // loadTalk(path);    
+              loadTalk(path);    
             }
           })
         }
@@ -66,16 +67,98 @@
 
     
   </script>
+
+  <!--聊天室-->
+  <div class="chat-container">
+    <div class="chat-btn" type="0"></div>
+    <div class="title">聊天室</div>
+    <ul id="messages" class="chat-message"></ul>
+    <form action="" class="chat-form">
+      <input id="m" autocomplete="off" class="chat-input" />
+      <button class="chat-btton">发 送</button>
+    </form>
+  </div>
   <script src="lib/docsify.min.js"></script>
   <script src="lib/plugins/search.js"></script>
   <script src="lib/plugins/ga.js"></script>
   <script src="lib/plugins/zoom-image.js"></script>
   <script src="//unpkg.com/docsify-copy-code"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/disqus.min.js"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
- 
+  <script src="lib/plugins/disqus.min.js"></script>
+  <script src="lib/plugins/gitalk.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+      $(function () {
+          var gitname = window.localStorage['git-name'];
+          if(!gitname){
+              gitname = '游客'+new Date().getTime().toString().substring(5);
+              window.localStorage['git-name']=gitname;
+          }
+          var socket = io('47.93.232.108:3001?gitname='+gitname);
+          var data ={};
+          $('form').submit(function(){
+              data.username = gitname;
+              data.msg = $('#m').val();
+
+              var html =
+                  '<li class="fr">' +
+                  ' <label class="fr"><img src="lib/image/head.jpg"></label>' +
+                  ' <label class="con-label fr"><span class="name fr">'+data.username+'</span><span class="msg fr">'+data.msg+'</span></label>' +
+                  '</li>';
+              $('#messages').append(html);
+
+              var scrollDom = document.getElementById('messages');
+              scrollDom.scrollTop = scrollDom.scrollHeight;
+
+              socket.emit('chat message', data);
+              $('#m').val('');
+              return false;
+          });
+
+          socket.on('conn', function(data){
+              //$('#messages').append($('<li style="color:blue;">').text(data.msg));
+              var html = '<li class="chat-info"><span>'+data.msg+'</span></li>';
+              $('#messages').append(html);
+          });
+          socket.on('disconn', function(data){
+             // $('#messages').append($('<li style="color:red;">').text(data.msg));
+              var html = '<li class="chat-info"><span>'+data.msg+'</span></li>';
+              $('#messages').append(html);
+          });
+          socket.on('chat message', function(data){
+              var html =
+                  '<li class="fl">' +
+                  ' <label class="fl"><img src="lib/image/head.jpg"></label>' +
+                  ' <label class="con-label fl"><span class="name fl">'+data.username+'</span><span class="msg fl">'+data.msg+'</span></label>' +
+                  '</li>';
+              $('#messages').append(html);
+
+              var scrollDom = document.getElementById('messages');
+              scrollDom.scrollTop = scrollDom.scrollHeight;
+              //$('#messages').append($('<li class="fl">').text(data.username+'('+data.clientIp+'):'+data.msg));
+          });
+
+
+          $('.chat-btn').click(function () {
+              var _this = this;
+              if($(_this).attr('type') == 0){
+                  $(_this).attr('type', 1);
+                  $(_this).css('background-image', 'url(lib/image/btn-right.png)');
+                  $('div.chat-container').css('transform', 'translateX(0)');
+              }else{
+                  $(_this).attr('type', 0);
+                  $(_this).css('background-image', 'url(lib/image/btn-left.png)');
+                  $('div.chat-container').css('transform', 'translateX(103%)');
+              }
+          });
+
+      });
+  </script>
+
+  <script src="lib/plugins/disqus.min.js"></script>
   
-  <!-- <script type="text/javascript">
+  <script type="text/javascript">
      var gitalk ;
 
      function loadTalk(path){
@@ -96,6 +179,6 @@
 
    
 
-  </script> -->
+  </script> 
 </body>
 </html>
