@@ -7,12 +7,12 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="lib/themes/vue.css">
-  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+  <link rel="stylesheet" href="lib/css/gitalk.css">
 </head>
 <body>
   <div id="app"></div>
  
-   <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script src="lib/plugins/gitalk.min.js"></script>
    <script>
     window.$docsify = {
       name: 'WIT-Learner',
@@ -57,7 +57,7 @@
             // 每次路由切换时数据全部加载完成后调用，没有参数。
              var path = window.location.href.split('#')[1];
             if(path != '/' && path != '/README'){
-              // loadTalk(path);    
+              loadTalk(path);    
             }
           })
         }
@@ -71,18 +71,18 @@
   <script src="lib/plugins/ga.js"></script>
   <script src="lib/plugins/zoom-image.js"></script>
   <script src="//unpkg.com/docsify-copy-code"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/disqus.min.js"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+  <script src="lib/plugins/disqus.min.js"></script>
+  
  
   
-  <!-- <script type="text/javascript">
+  <script type="text/javascript">
      var gitalk ;
 
      function loadTalk(path){
         gitalk = new Gitalk({
           id : path,
-          clientID: '',
-          clientSecret: '',
+          clientID: '3166bd7720c1a2e35cc2',
+          clientSecret: '117bf872afbc09e8efea2c0935d43ef8ebf55029',
           repo: 'docs',
           owner: 'wantstudy',
           admin: ['wantstudy', 'WL-XIN'],
@@ -96,6 +96,6 @@
 
    
 
-  </script> -->
+  </script> 
 </body>
 </html>

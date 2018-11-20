@@ -24,12 +24,14 @@
 
 
 
-## SocketIO
+## SocketIO 
 
-	WebSocket是SocketIO的一个子集
-   
-   [项目地址](https://github.com/wantstudy/chat-example)
+   [参考文档 w3cschool](https://www.w3cschool.cn/socket/socket-ulbj2eii.html)
 
+   [项目地址 github](https://github.com/wantstudy/chat-example)
+
+   	WebSocket是SocketIO的一个子集
+   	
 > **前端代码**`index.html`
 	
 	<!doctype html>
