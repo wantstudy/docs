@@ -15,6 +15,15 @@ Git 项目/版本库管理
 ----
 > __什么是版本库呢？版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。__
 
+> **工作区和暂存区**
+	
+	工作区: 是你在电脑里能看到的目录，比如我的learngit文件夹就是一个工作区
+
+	版本库:  工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。Git的版本库里存了很多东西，
+	其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以
+	及指向master的一个指针叫HEAD。
+
+   ![Alt work_stage](../../_media/git/work_stage.jpg)
 
 > **下载已有项目**
 
@@ -35,16 +44,22 @@ Git 常用操作命令
 -----
 
 1. `git add <file>`
-	**添加文件到仓库,文件可多选**
+	要提交的所有修改放到暂存区（Stage）,文件可多选
 
-2. `git commit -m <message>` 
-	**提交文件到仓库,message 为备注**
+2. `git commit -m 'message'` 
+	一次性把暂存区的所有修改提交到分支,message 为备注
 
 3. `git status` 
-	**查看当前仓库状态**
+	查看当前仓库状态
 
-4. `git diff <file>` 
-	**查看文件修改的内容**
+4. `git diff` 
+	比较工作区与暂存区的差异
+
+5. `git checkout -- file`
+
+	readme.txt自修改后还没有被放到暂存区,撤销修改就回到和版本库一模一样的状态
+
+	readme.txt已经添加到暂存区后，又作了修改，撤销修改就回到添加到暂存区后的状态
 
 
 
@@ -55,6 +70,8 @@ Git 常用操作命令
 1. 查看提交历史
 
 `git log --pretty=oneline` 
+
+`git log --graph --pretty=oneline --abbrev-commit`
 
 2. 回退到上一版本
 
@@ -75,14 +92,22 @@ Git 常用操作命令
 
    查看分支：`git branch`
 
-   创建分支：`git branch <name>`
+   查看分支详细信息：`git branch -v`
 
-   切换分支：`git checkout <name>`
+   创建分支：`git branch <dev>`
+
+   切换分支：`git checkout <dev>`
 
    创建+切换分支：`git checkout -b <name>`
 
-   合并某分支到当前分支：`git merge <name>`
+   创建远程峰值：`git push origin <dev>`
 
-   删除分支：`git branch -d <name>`
+   合并某分支到当前分支：`git merge <dev>`
+
+   查看合并后冲突： `git status`
+
+   删除本地分支：`git branch -d <dev>`
+
+   删除远程分支：`git push origin --delete <dev>`
 
 

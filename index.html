@@ -8,7 +8,10 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="lib/themes/vue.css">
   <link rel="stylesheet" href="lib/css/gitalk.css">
+<<<<<<< HEAD
   <link rel="stylesheet" href="lib/css/index.css">
+=======
+>>>>>>> 1e7eca47fff29370d0841381abcb9b68f5f3095c
 </head>
 <body>
   <div id="app"></div>
@@ -68,6 +71,7 @@
     
   </script>
 
+<<<<<<< HEAD
   <!--聊天室-->
   <div class="chat-container">
     <div class="chat-btn" type="0"></div>
@@ -78,6 +82,24 @@
       <button class="chat-btton">发 送</button>
     </form>
   </div>
+=======
+
+
+
+
+  <div class="chat-message">
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+
+
+  </div>
+
+
+
+
+>>>>>>> 1e7eca47fff29370d0841381abcb9b68f5f3095c
   <script src="lib/docsify.min.js"></script>
   <script src="lib/plugins/search.js"></script>
   <script src="lib/plugins/ga.js"></script>
@@ -101,6 +123,7 @@
               data.username = gitname;
               data.msg = $('#m').val();
 
+<<<<<<< HEAD
               var html =
                   '<li class="fr">' +
                   ' <label class="fr"><img src="lib/image/head.jpg"></label>' +
@@ -111,12 +134,17 @@
               var scrollDom = document.getElementById('messages');
               scrollDom.scrollTop = scrollDom.scrollHeight;
 
+=======
+              var text = gitname+': '+data.msg;
+              $('#messages').append($('<li style="border-left:200px;">').text(text));
+>>>>>>> 1e7eca47fff29370d0841381abcb9b68f5f3095c
               socket.emit('chat message', data);
               $('#m').val('');
               return false;
           });
 
           socket.on('conn', function(data){
+<<<<<<< HEAD
               //$('#messages').append($('<li style="color:blue;">').text(data.msg));
               var html = '<li class="chat-info"><span>'+data.msg+'</span></li>';
               $('#messages').append(html);
@@ -151,6 +179,15 @@
                   $(_this).css('background-image', 'url(lib/image/btn-left.png)');
                   $('div.chat-container').css('transform', 'translateX(103%)');
               }
+=======
+              $('#messages').append($('<li style="color:blue;">').text(data.msg));
+          });
+          socket.on('disconn', function(data){
+              $('#messages').append($('<li style="color:red;">').text(data.msg));
+          });
+          socket.on('chat message', function(data){
+              $('#messages').append($('<li>').text(data.username+'('+data.clientIp+'):'+data.msg));
+>>>>>>> 1e7eca47fff29370d0841381abcb9b68f5f3095c
           });
 
       });
