@@ -18,6 +18,10 @@
     window.$docsify = {
       name: 'WIT-Learner',
       loadSidebar: true,
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+        '/.*/nav.md': '/nav.md'
+      }
       mergeNavbar: true,
       coverpage: true,
       repo: 'https://github.com/wantstudy/docs/',
@@ -86,9 +90,14 @@
   <script src="//unpkg.com/docsify-copy-code"></script>
   <script src="lib/plugins/disqus.min.js"></script>
   <script src="lib/plugins/gitalk.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<!--   <script src="lib/plugins/code/prism-git.js"></script>
+  <script src="lib/plugins/code/prism-sql.js"></script>
+  <script src="lib/plugins/code/prism-java.js"></script>
+  <script src="lib/plugins/code/prism-bash.js"></script>
+ -->
+  <script src="lib/plugins/socket.io.js"></script>
+  <script src="lib/plugins/jquery-1.11.1.js"></script>
+  <script src="lib/plugins/docsify-pagination.min.js"></script>
   <script>
       $(function () {
           var gitname = window.localStorage['git-name'];
