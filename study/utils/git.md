@@ -55,11 +55,17 @@ Git 常用操作命令
 4. `git diff` 
 	比较工作区与暂存区的差异
 
+		git fetch origin  更新本地的远程分支
+
+		git log master..origin/master   本地与远程的差集 :（显示远程有而本地没有的commit信息）
+		
+		git diff <local branch> <remote>/<remote branch>	统计文件的改动
+
 5. `git checkout -- file`
 
-	readme.txt自修改后还没有被放到暂存区,撤销修改就回到和版本库一模一样的状态
+		readme.txt自修改后还没有被放到暂存区,撤销修改就回到和版本库一模一样的状态
 
-	readme.txt已经添加到暂存区后，又作了修改，撤销修改就回到添加到暂存区后的状态
+		readme.txt已经添加到暂存区后，又作了修改，撤销修改就回到添加到暂存区后的状态
 
 
 
@@ -100,7 +106,7 @@ Git 常用操作命令
 
    创建+切换分支：`git checkout -b <name>`
 
-   创建远程峰值：`git push origin <dev>`
+   创建远程分支：`git push origin <dev>`
 
    合并某分支到当前分支：`git merge <dev>`
 
