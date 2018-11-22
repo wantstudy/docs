@@ -148,3 +148,30 @@ _一天一个小命令_
 
     ps -ef //显示所有命令，连带命令行
     ps -ef|grep tomcat 显示tomcat进程信息
+
+
+### tail 显示文档最后几行，如果有更新，自动显示
+
+*用法：* `tail [ -f ] [ -c Number | -n Number | -m Number | -b Number | -k Number ] [ File ]`
+
+*参数：*
+
+    -f 该参数用于监视File文件增长。
+    -c Number 从 Number 字节位置读取指定文件
+    -n Number 从 Number 行位置读取指定文件。
+    -m Number 从 Number 多字节字符位置读取指定文件，比方你的文件假设包括中文字，假设指定-c参数，
+              可能导致截断，但使用-m则会避免该问题。
+    -b Number 从 Number 表示的512字节块位置读取指定文件。
+    -k Number 从 Number 表示的1KB块位置读取指定文件。
+
+    不指定Number，默认显示10行
+
+*示例：*
+    
+    tail -f fileName  监视filename文件的尾部内容（默认10行，相当于增加参数 -n 10），
+                      刷新显示在屏幕上。退出，按下CTRL+C
+    tail -n 20 filename  显示filename最后20行。
+    tail -r -n 10 fileName  逆序显示filename最后10行
+
+
+vim /etc/sudoers
