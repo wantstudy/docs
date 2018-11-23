@@ -12,16 +12,12 @@
 </head>
 <body>
   <div id="app"></div>
+ 
    <script src="lib/plugins/gitalk.min.js"></script>
-
    <script>
     window.$docsify = {
       name: 'WIT-Learner',
       loadSidebar: true,
-      alias: {
-        '/.*/_sidebar.md': '/_sidebar.md',
-        '/.*/nav.md': '/nav.md'
-      },
       mergeNavbar: true,
       coverpage: true,
       repo: 'https://github.com/wantstudy/docs/',
@@ -75,10 +71,10 @@
   <!--聊天室-->
   <div class="chat-container">
     <div class="chat-btn" type="0"></div>
-    <div class="title">聊天室</div>
+    <div class="title">交流会</div>
     <ul id="messages" class="chat-message"></ul>
     <form action="" class="chat-form">
-      <input id="m" autocomplete="off" class="chat-input" />
+      <textarea id="m" autocomplete="off" class="chat-input"></textarea>
       <button class="chat-btton">发 送</button>
     </form>
   </div>
@@ -90,22 +86,18 @@
   <script src="//unpkg.com/docsify-copy-code"></script>
   <script src="lib/plugins/disqus.min.js"></script>
   <script src="lib/plugins/gitalk.min.js"></script>
-<!--   <script src="lib/plugins/code/prism-git.js"></script>
-  <script src="lib/plugins/code/prism-sql.js"></script>
-  <script src="lib/plugins/code/prism-java.js"></script>
-  <script src="lib/plugins/code/prism-bash.js"></script>
- -->
-  <script src="lib/plugins/socket.io.js"></script>
-  <script src="lib/plugins/jquery-1.11.1.js"></script>
-  <script src="lib/plugins/docsify-pagination.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
       $(function () {
-          var gitname = window.localStorage['git-name'];
+          var gitname = window.localStorage['real-name'];
           if(!gitname){
               gitname = '游客'+new Date().getTime().toString().substring(5);
-              window.localStorage['git-name']=gitname;
+              window.localStorage['real-name']=gitname;
           }
           var socket = io('47.93.232.108:3001?gitname='+gitname);
+          //var socket = io('192.168.1.12:3001?gitname='+gitname);
           var data ={};
           $('form').submit(function(){
               data.username = gitname;
@@ -123,30 +115,39 @@
 
               socket.emit('chat message', data);
               $('#m').val('');
+              $('#m').css('height', '35px');
               return false;
           });
 
           socket.on('conn', function(data){
-              //$('#messages').append($('<li style="color:blue;">').text(data.msg));
               var html = '<li class="chat-info"><span>'+data.msg+'</span></li>';
               $('#messages').append(html);
           });
           socket.on('disconn', function(data){
-              // $('#messages').append($('<li style="color:red;">').text(data.msg));
               var html = '<li class="chat-info"><span>'+data.msg+'</span></li>';
               $('#messages').append(html);
           });
           socket.on('chat message', function(data){
-              var html =
-                  '<li class="fl">' +
-                  ' <label class="fl"><img src="lib/image/head.jpg"></label>' +
-                  ' <label class="con-label fl"><span class="name fl">'+data.username+'</span><span class="msg fl">'+data.msg+'</span></label>' +
-                  '</li>';
+              var html = '';
+              if(data.username == localStorage.getItem('real-name')){
+                  html +=
+                      '<li class="fr">' +
+                      ' <label class="fr"><img src="lib/image/head.jpg"></label>' +
+                      ' <label class="con-label fr"><span class="name fr">'+data.username+'</span><span class="msg fr">'+data.msg+'</span></label>' +
+                      '</li>';
+              }else{
+                  html +=
+                      '<li class="fl">' +
+                      ' <label class="fl"><img src="lib/image/head.jpg"></label>' +
+                      ' <label class="con-label fl"><span class="name fl">'+data.username+'</span><span class="msg fl">'+data.msg+'</span></label>' +
+                      '</li>';
+              }
+
+
               $('#messages').append(html);
 
               var scrollDom = document.getElementById('messages');
               scrollDom.scrollTop = scrollDom.scrollHeight;
-              //$('#messages').append($('<li class="fl">').text(data.username+'('+data.clientIp+'):'+data.msg));
           });
 
 
@@ -159,11 +160,43 @@
               }else{
                   $(_this).attr('type', 0);
                   $(_this).css('background-image', 'url(lib/image/btn-left.png)');
-                  $('div.chat-container').css('transform', 'translateX(103%)');
+                  $('div.chat-container').css('transform', 'translateX(104%)');
               }
           });
 
+
+          $('#m').keydown(function(event){
+              var _this = this;
+
+              if(event.which == 13){
+                  $('form').submit();
+              }
+
+              textareHei(_this);
+          });
+
+          $('#m').blur(function(event){
+              var _this = this;
+              textareHei(_this);
+
+          });
+
       });
+
+      function textareHei(_this) {
+          if(_this.scrollHeight <= 118 && _this.scrollHeight >= 35){
+              $(_this).css('height', _this.scrollHeight + 'px');
+          }else if (_this.scrollHeight > 118){
+              $(_this).css('height', '118px');
+          }else if(_this.scrollHeight <= 35){
+              $(_this).css('height', '35px');
+          }
+
+          if(!$(_this).val()){
+              $(_this).css('height', '35px');
+          }
+          $('#messages').css('height', (490 - $(_this).parent().height()) + 'px');
+      }
   </script>
 
   <script src="lib/plugins/disqus.min.js"></script>
@@ -185,10 +218,6 @@
 
         gitalk.render('gitalk-container');
      }
-
-
-   
-
   </script> 
 </body>
 </html>
