@@ -105,6 +105,7 @@
           $('form').submit(function(){
               data.username = gitname;
               data.msg = replace_em($('#chat_content').val());
+              if(!data.msg){return;};
 
               var html =
                   '<li class="fr animate-r-s">' +
@@ -117,8 +118,7 @@
                   $('#messages li').css('transform', 'translateX(0px)');
               },50);
 
-              var scrollDom = document.getElementById('messages');
-              scrollDom.scrollTop = scrollDom.scrollHeight;
+              scrHeight();
 
               socket.emit('chat message', data);
               $('#chat_content').val('');
@@ -129,10 +129,12 @@
           socket.on('conn', function(data){
               var html = '<li class="chat-info"><span>'+data.msg+'</span></li>';
               $('#messages').append(html);
+              scrHeight();
           });
           socket.on('disconn', function(data){
               var html = '<li class="chat-info"><span>'+data.msg+'</span></li>';
               $('#messages').append(html);
+              scrHeight();
           });
           socket.on('chat message', function(data){
               var html = '';
@@ -157,8 +159,8 @@
                   $('#messages li').css('transform', 'translateX(0px)');
               },50);
 
-              var scrollDom = document.getElementById('messages');
-              scrollDom.scrollTop = scrollDom.scrollHeight;
+              scrHeight();
+
           });
 
 
@@ -176,14 +178,13 @@
           });
 
 
-         $('#chat_content').keydown(function(event){
-             // var _this = this;
+         $('#chat_content').keyup(function(event){
 
               if(event.which == 13){
                   $('form').submit();
               }
 
-              //textareHei(_this);
+              //textareHei(this);
           });
 
           /* $('#m').blur(function(event){
@@ -227,6 +228,11 @@
 
           return str;
 
+      }
+      
+      function scrHeight() {
+          var scrollDom = document.getElementById('messages');
+          scrollDom.scrollTop = scrollDom.scrollHeight;
       }
   </script>
 
