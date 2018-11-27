@@ -174,4 +174,37 @@ _一天一个小命令_
     tail -r -n 10 fileName  逆序显示filename最后10行
 
 
-vim /etc/sudoers
+### locate 查找文件或目录
+
+*简介:*
+    
+    locate命令要比find -name快得多，原因在于它不搜索具体目录，而是搜索一个数据库/var/lib/mlocate/mlocate.db 。这个数据库中含有本地所有文件信息。Linux系统自动创建这个数据库，并且每天自动更新一次，因此，我们在用whereis和locate 查找文件时，有时会找到已经被删除的数据，或者刚刚建立文件，却无法查找到，原因就是因为数据库文件没有被更新。为了避免这种情况，可以在使用locate之前，先使用updatedb命令，手动更新数据库。整个locate工作其实是由四部分组成的:
+
+    /usr/bin/updatedb   主要用来更新数据库，通过crontab自动完成的
+
+    /usr/bin/locate         查询文件位置
+
+    /etc/updatedb.conf   updatedb的配置文件
+
+    /var/lib/mlocate/mlocate.db  存放文件信息的文件
+
+*用法:*
+
+    locate [OPTION]... [PATTERN]...
+
+*参数:*
+
+    -b, --basename         match only the base name of path names
+    -c, --count            只输出找到的数量
+    -d, --database DBPATH  使用DBPATH指定的数据库，而不是默认数据库 
+                           +/var/lib/mlocate/mlocate.db
+    -i, --ignore-case      忽略大小写
+    -q, --quiet            安静模式，不会显示任何错误讯息
+    -r, --regexp REGEXP    使用基本正则表达式
+    --regex            使用扩展正则表达式
+
+*示例:*
+
+    搜索etc目录下所有以my开头的文件
+    
+        locate /etc/my
