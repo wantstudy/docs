@@ -56,7 +56,9 @@
 	
 
 
-### 项目部署(git)[转载地址](https://blog.csdn.net/taishanduba/article/details/61423121)
+### 项目部署
+
+ [转载地址](https://blog.csdn.net/taishanduba/article/details/61423121)
 
  [External job](https://wiki.jenkins.io/display/JENKINS/Monitoring+external+jobs)
  
