@@ -74,7 +74,8 @@
     <div class="title">交流会</div>
     <ul id="messages" class="chat-message"></ul>
     <form action="" class="chat-form">
-      <textarea id="m" autocomplete="off" class="chat-input"></textarea>
+      <textarea id="chat_content" name="chat_content" class="chat-input"></textarea>
+      <span class="emotion"><img src="lib/image/bq.png" ></span>
       <button class="chat-btton">发 送</button>
     </form>
   </div>
@@ -88,7 +89,9 @@
   <script src="lib/plugins/gitalk.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <!--<script src="https://code.jquery.com/jquery-1.11.1.js"></script>-->
+  <script src="lib/plugins/jquery.min.js"></script>
+  <script src="lib/plugins/jquery.qqFace.js"></script>
   <script>
       $(function () {
           var gitname = window.localStorage['real-name'];
@@ -101,11 +104,11 @@
           var data ={};
           $('form').submit(function(){
               data.username = gitname;
-              data.msg = $('#m').val();
+              data.msg = replace_em($('#chat_content').val());
 
               var html =
                   '<li class="fr animate-r-s">' +
-                  ' <label class="fr"><img src="lib/image/head.jpg"></label>' +
+                  ' <label class="fr head"><img src="lib/image/head.jpg"></label>' +
                   ' <label class="con-label fr"><span class="name fr">'+data.username+'</span><span class="msg fr">'+data.msg+'</span></label>' +
                   '</li>';
               $('#messages').append(html);
@@ -118,8 +121,8 @@
               scrollDom.scrollTop = scrollDom.scrollHeight;
 
               socket.emit('chat message', data);
-              $('#m').val('');
-              $('#m').css('height', '35px');
+              $('#chat_content').val('');
+             // $('#m').css('height', '35px');
               return false;
           });
 
@@ -136,13 +139,13 @@
               if(data.username == localStorage.getItem('real-name')){
                   html +=
                       '<li class="fr animate-r-s">' +
-                      ' <label class="fr"><img src="lib/image/head.jpg"></label>' +
+                      ' <label class="fr head"><img src="lib/image/head.jpg"></label>' +
                       ' <label class="con-label fr"><span class="name fr">'+data.username+'</span><span class="msg fr">'+data.msg+'</span></label>' +
                       '</li>';
               }else{
                   html +=
                       '<li class="fl animate-l-s">' +
-                      ' <label class="fl"><img src="lib/image/head.jpg"></label>' +
+                      ' <label class="fl head"><img src="lib/image/head.jpg"></label>' +
                       ' <label class="con-label fl"><span class="name fl">'+data.username+'</span><span class="msg fl">'+data.msg+'</span></label>' +
                       '</li>';
               }
@@ -173,20 +176,26 @@
           });
 
 
-          $('#m').keydown(function(event){
-              var _this = this;
+         $('#chat_content').keydown(function(event){
+             // var _this = this;
 
               if(event.which == 13){
                   $('form').submit();
               }
 
-              textareHei(_this);
+              //textareHei(_this);
           });
 
-          $('#m').blur(function(event){
+          /* $('#m').blur(function(event){
               var _this = this;
               textareHei(_this);
 
+          });*/
+
+          $('span.emotion').qqFace({
+              id : 'facebox',
+              assign:'chat_content',
+              path:'lib/image/arclist/'	//表情存放的路径
           });
 
       });
@@ -204,6 +213,20 @@
               $(_this).css('height', '35px');
           }
           $('#messages').css('height', (490 - $(_this).parent().height()) + 'px');
+      }
+
+      function replace_em(str){
+
+          str = str.replace(/\</g,'&lt;');
+
+          str = str.replace(/\>/g,'&gt;');
+
+          str = str.replace(/\n/g,'<br/>');
+
+          str = str.replace(/\[em_([0-9]*)\]/g,'<img src="lib/image/arclist/$1.gif" border="0" />');
+
+          return str;
+
       }
   </script>
 
