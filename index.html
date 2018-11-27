@@ -104,11 +104,15 @@
               data.msg = $('#m').val();
 
               var html =
-                  '<li class="fr">' +
+                  '<li class="fr animate-r-s">' +
                   ' <label class="fr"><img src="lib/image/head.jpg"></label>' +
                   ' <label class="con-label fr"><span class="name fr">'+data.username+'</span><span class="msg fr">'+data.msg+'</span></label>' +
                   '</li>';
               $('#messages').append(html);
+
+              setTimeout(function () {
+                  $('#messages li').css('transform', 'translateX(0px)');
+              },50);
 
               var scrollDom = document.getElementById('messages');
               scrollDom.scrollTop = scrollDom.scrollHeight;
@@ -131,13 +135,13 @@
               var html = '';
               if(data.username == localStorage.getItem('real-name')){
                   html +=
-                      '<li class="fr">' +
+                      '<li class="fr animate-r-s">' +
                       ' <label class="fr"><img src="lib/image/head.jpg"></label>' +
                       ' <label class="con-label fr"><span class="name fr">'+data.username+'</span><span class="msg fr">'+data.msg+'</span></label>' +
                       '</li>';
               }else{
                   html +=
-                      '<li class="fl">' +
+                      '<li class="fl animate-l-s">' +
                       ' <label class="fl"><img src="lib/image/head.jpg"></label>' +
                       ' <label class="con-label fl"><span class="name fl">'+data.username+'</span><span class="msg fl">'+data.msg+'</span></label>' +
                       '</li>';
@@ -145,6 +149,10 @@
 
 
               $('#messages').append(html);
+
+              setTimeout(function () {
+                  $('#messages li').css('transform', 'translateX(0px)');
+              },50);
 
               var scrollDom = document.getElementById('messages');
               scrollDom.scrollTop = scrollDom.scrollHeight;
