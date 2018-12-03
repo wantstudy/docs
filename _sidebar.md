@@ -5,15 +5,20 @@
 	- [Spring Boot](study/java/springBoot.md)
 	- [Spring Cloud](study/java/springCloud.md)
 	- [JMM 内存模型](study/java/jmm.md)
-	- [JVM 设计/调优](study/java/jvm.md)
 	- [Netty/Mina](study/java/netty.md)
 	- [Tomcat 设计/调优](study/java/tomcat.md)
+- JVM
+	- [Java 运行时的内存划分](study/jvm/runMemery.md)
+	- [类加载机制](study/jvm/classLoader.md)
+	- [OOM 分析](study/jvm/oom.md)	
+	- [GC 垃圾回收](study/jvm/gc.md)
+	- [对象创建与内存分配](study/jvm/newObject.md)
+	- [synchornize 关键字](study/jvm/synchronize.md)
 - 数据库
 	- [MySql](study/db/mysql.md)
 	- [Redis](study/db/redis.md)
 	- [Mongo](study/db/mongo.md)
 - Linux
-	- [Linux](study/Linux/linux.md)
 	- [Linux 每天命令](study/Linux/linuxCommand.md)
 	- [Shell 脚本](study/Linux/shell.md)
 - 运维/工具
