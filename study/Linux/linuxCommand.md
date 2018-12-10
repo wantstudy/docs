@@ -449,3 +449,20 @@ _一天一个小命令_
 `awk 'length>3' awktest.txt`     从文件中找出长度大于3的行
 
 `seq 9 | sed 'H;g' | awk -v RS='' '{for(i=1;i<=NF;i++)printf("%dx%d=%d%s", i, NR, i*NR, i==NR?"\n":"\t")}'`       打印九九乘法表
+
+
+### lsof 列出当前系统打开的文件
+
+*用法：* ` lsof ［options］ file`
+
+*常用示例：*
+
+`lsof ./chat-example/`  查看谁正在使用这个文件
+
+`lsof -i :3306`     查看哪个程序正在使用端口
+
+`lsof -i udp:55`    列出谁在使用某个特定的udp端口
+
+`lsof +D /root/software/` 递归查看某个目录的文件信息
+
+`lsof -N`   列出所有网络文件系统
