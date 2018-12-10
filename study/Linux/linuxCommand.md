@@ -397,4 +397,55 @@ _一天一个小命令_
    ![Alt ll](../../_media/linux/sz.png)
 
 
+### awk 对文本和数据进行格式处理
 
+*用法：* `awk [options] 'pattern{action}' file`
+
+*参数：*
+    
+    -F fs or --field-separator fs
+        指定输入文件折分隔符，fs是一个字符串或者是一个正则表达式，如-F:。
+    -v var=value or --asign var=value
+        赋值一个用户定义变量。
+    -f scripfile or --file scriptfile
+        从脚本文件中读取awk命令。
+
+*内建变量：*
+
+| 变量 | 描述 | 
+| ------ | ------ | 
+| FS  |  字段分隔符(默认是任何空格)|
+| $n  |  当前记录的第n个字段，字段间由FS分隔|
+| $0  |  完整的输入记录|
+| ARGC | 命令行参数的数目|
+| ARGIND |命令行中当前文件的位置(从0开始算)||
+| FILENAME | 当前文件名|
+| OFMT  |数字的输出格式(默认值是%.6g)|
+
+*示例 1：*
+
+![Alt awk_1](../../_media/linux/awk_1.png)
+
+*示例 2：*
+
+![Alt awk_2](../../_media/linux/awk_2.png)
+
+*示例 3：*
+
+![Alt awk_3](../../_media/linux/awk_3.png)
+
+*示例 4(正则查询)：*
+
+`awk '$1 ~ /2/ {print $0}' awktest.txt`  查找第一列为2的行,  `$1`:第一列 `~:`正则开始 `//`:模式
+
+`awk '/2/ {print $0}' awktest.txt`     查找包含2的行
+
+`awk '$1 !~ /2/ {print $0}' awktest.txt`       取反
+
+*其他：*
+
+`ls -l *.txt | awk '{sum+=$6} END {print sum}'`  计算文件大小
+
+`awk 'length>3' awktest.txt`     从文件中找出长度大于3的行
+
+`seq 9 | sed 'H;g' | awk -v RS='' '{for(i=1;i<=NF;i++)printf("%dx%d=%d%s", i, NR, i*NR, i==NR?"\n":"\t")}'`       打印九九乘法表
