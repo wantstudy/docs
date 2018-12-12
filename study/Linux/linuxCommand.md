@@ -570,3 +570,4 @@ _一天一个小命令_
 
     使用wget断点续传
     wget -c http://www.linuxde.net/testfile.zip
+
