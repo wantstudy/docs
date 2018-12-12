@@ -5,4 +5,4 @@
 > A documentation to study.
 
 [GitHub](https://github.com/wantstudy/docs)
-[Get Started](/index.md)
+[Get Started](/start.md)
