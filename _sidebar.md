@@ -20,7 +20,8 @@
 	- [Mongo](study/db/mongo.md)
 - Linux
 	- [Linux 每天命令](study/Linux/linuxCommand.md)
-	- [Shell 脚本](study/Linux/shell.md)
+	- [Linux Shell](study/Linux/shell.md)
+	- [Shell 脚本](study/Linux/shellScript.md)
 - 运维/工具
 	- [Docker](study/utils/docker.md)
 	- [Dubbo](study/utils/dubbo.md)

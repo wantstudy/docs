@@ -58,7 +58,7 @@
           hook.doneEach(function() {
             // 每次路由切换时数据全部加载完成后调用，没有参数。
              var path = window.location.href.split('#')[1];
-            if(path != '/' && path != '/README'){
+            if(path != '/' && path != '/start'){
               loadTalk(path);    
             }
           })
