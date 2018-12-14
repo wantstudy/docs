@@ -446,6 +446,7 @@ _一天一个小命令_
 
 `seq 9 | sed 'H;g' | awk -v RS='' '{for(i=1;i<=NF;i++)printf("%dx%d=%d%s", i, NR, i*NR, i==NR?"\n":"\t")}'`       打印九九乘法表
 
+## 系统
 
 ### lsof 列出当前系统打开的文件
 
@@ -465,8 +466,6 @@ _一天一个小命令_
 `lsof -N`   列出所有网络文件系统
 
 
-
-## 系统
 
 ### ifconfig 配置和显示Linux内核中网络接口的网络参数
 
@@ -551,6 +550,61 @@ _一天一个小命令_
 
 
     ifconfig eth0 mtu 1500    #设置能通过的最大数据包大小为 1500 bytes
+
+### free 显示内存状态
+*用法：* ` free [-bkmotV][-s <间隔秒数>]`
+
+*options：*
+
+    -b 　以Byte为单位显示内存使用情况。
+    -k 　以KB为单位显示内存使用情况。
+    -m 　以MB为单位显示内存使用情况
+    -s<间隔秒数> 　持续观察内存使用状况。
+    -t 　显示内存总和列。
+
+*示例 :*
+
+    [root@iZ2ze1bs0o0pc ~]# free -m
+                 total       used       free     shared    buffers     cached
+
+    Mem:         32168      30119       2048          0       4438      11097
+
+    -/+ buffers/cache:      14583      17584
+
+    Swap:        31996       1899      30097
+
+*返回参数说明*
+
++ 第二行 Mem
+
+`total`:总计物理内存的大小。
+
+`used`:已使用多大。
+
+`free`:可用有多少。
+
+`Shared`:多个进程共享的内存总额。
+
+`Buffers/cached`:磁盘缓存的大小。
+
++ 第三行(-/+ buffers/cached):
+
+`used`:已使用多大。
+
+`free`:可用有多少。
+
++ 第四行
+
+是交换分区SWAP的，也就是我们通常所说的虚拟内存。
+
+**区别**：第二行(mem)的used/free与第三行(-/+ buffers/cache) used/free的区别。 这两个的区别在于使用的角度来看，第一行是从`OS的角度来看`，因为对于OS，buffers/cached 都是属于被使用，其中包括，内核（OS）使用+Application(X, oracle,etc)使用的+buffers+cached.
+
+第三行所指的是`从应用程序角度来看`，对于应用程序来说，buffers/cached 是等于可用的，因为buffer/cached是为了提高文件读取的性能，当应用程序需在用到内存的时候，buffer/cached会很快地被回收。
+
+所以从应用程序的角度来说，可用内存=系统free memory+buffers+cached。
+
+
+
 
 ## 网络操作
 
