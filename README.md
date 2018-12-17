@@ -1,3 +1,5 @@
+ `不积跬步无以至千里`
+
 - Java
 	- [Java 集合原理](study/java/array.md)
 - JVM
