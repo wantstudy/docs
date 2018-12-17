@@ -42,7 +42,7 @@
 - 前端
 	- [SocketIO](study/front/websocket.md)
 	<!-- - [FreeMarker](study/front/freemarker.md) -->
-<!-- - Python -->
-<!--	- [Python](study/python/python.md) -->
-<!-- - 微信-->
-<!--	- [微信小程序](study/wechat/wechat.md) -->
+<!-- - Python  -->
+	<!-- - [Python](study/python/python.md) -->
+<!-- - 微信 -->
+	<!-- - [微信小程序](study/wechat/wechat.md) -->
