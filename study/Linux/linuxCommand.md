@@ -629,6 +629,28 @@ _一天一个小命令_
     使用wget断点续传
     wget -c http://www.linuxde.net/testfile.zip
 
+## scp 远程文件拷贝
+
+*用法：* `scp [可选参数] file_source file_target `
+
+*options：*
+
+    -r： 递归复制整个目录
+    -P port：注意是大写的P, port是指定数据传输用到的端口号
+    -v：详细方式显示输出
+    -4： 强制scp命令只使用IPv4寻址
+
+*示例：*
+
+1. 从本地复制到远程
+    scp -r local_folder remote_username@remote_ip:remote_folder 
+    或者 
+    scp -r local_folder remote_ip:remote_folder 
+
+2. 从远程复制到本地
+
+    scp remote_username@remote_ip:/home/root/others/music /home/space/music/1.mp3 
+    scp -r remote_ip:/home/root/others/ /home/space/music/
 
 ## 任务管理
 
