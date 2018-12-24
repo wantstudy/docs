@@ -629,7 +629,7 @@ _一天一个小命令_
     使用wget断点续传
     wget -c http://www.linuxde.net/testfile.zip
 
-## scp 远程文件拷贝
+### scp 远程文件拷贝
 
 *用法：* `scp [可选参数] file_source file_target `
 
@@ -651,6 +651,17 @@ _一天一个小命令_
 
     scp remote_username@remote_ip:/home/root/others/music /home/space/music/1.mp3 
     scp -r remote_ip:/home/root/others/ /home/space/music/
+
+### wall 向所有终端发送信息
+
+*用法：*
+
+    [root@localhost ~]# wall this is a test line
+
+    Broadcast message from root (pts/1) (Fri Dec 20 11:36:51 2013):
+
+    this is a test line
+    
 
 ## 任务管理
 
