@@ -27,3 +27,8 @@
 
 .fr{float: right;text-align: right;}
 .fl{float: left;}
+
+.cover-main img{border: 2px solid #fff;border-radius: 8px;box-shadow: 1px 1px 5px 1px #333}
+
+.cover-main>p:last-child a {border:1px solid #333 !important;color: #333 !important;}
+.cover-main>p:last-child a:last-child{background-color: #333!important; color: #fff!important;}
